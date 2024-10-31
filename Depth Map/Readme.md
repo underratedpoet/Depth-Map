@@ -1,10 +1,10 @@
 https://www.glfw.org/download.html
-Добавь пути к заголовочным файлам и библиотекам GLFW:
-Project -> Properties -> C/C++ -> General -> Additional Include Directories: добавь путь к папке include из распакованного архива GLFW.
-Project -> Properties -> Linker -> General -> Additional Library Directories: добавь путь к папке lib-vc2019 (или другой, соответствующей твоей версии Visual Studio) из распакованного архива GLFW.
-Project -> Properties -> Linker -> Input -> Additional Dependencies: добавь glfw3.lib.
+Р”РѕР±Р°РІСЊ РїСѓС‚Рё Рє Р·Р°РіРѕР»РѕРІРѕС‡РЅС‹Рј С„Р°Р№Р»Р°Рј Рё Р±РёР±Р»РёРѕС‚РµРєР°Рј GLFW:
+Project -> Properties -> C/C++ -> General -> Additional Include Directories: РґРѕР±Р°РІСЊ РїСѓС‚СЊ Рє РїР°РїРєРµ include РёР· СЂР°СЃРїР°РєРѕРІР°РЅРЅРѕРіРѕ Р°СЂС…РёРІР° GLFW.
+Project -> Properties -> Linker -> General -> Additional Library Directories: РґРѕР±Р°РІСЊ РїСѓС‚СЊ Рє РїР°РїРєРµ lib-vc2019 (РёР»Рё РґСЂСѓРіРѕР№, СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РµР№ С‚РІРѕРµР№ РІРµСЂСЃРёРё Visual Studio) РёР· СЂР°СЃРїР°РєРѕРІР°РЅРЅРѕРіРѕ Р°СЂС…РёРІР° GLFW.
+Project -> Properties -> Linker -> Input -> Additional Dependencies: РґРѕР±Р°РІСЊ glfw3.lib.
 
 https://glad.dav1d.de/
-Добавь файлы glad.c в свой проект (правой кнопкой на проект -> Add -> Existing Item).
-Добавь пути к заголовочным файлам GLAD:
-Project -> Properties -> C/C++ -> General -> Additional Include Directories: добавь путь к папке include из распакованного архива GLAD.
+Р”РѕР±Р°РІСЊ С„Р°Р№Р»С‹ glad.c РІ СЃРІРѕР№ РїСЂРѕРµРєС‚ (РїСЂР°РІРѕР№ РєРЅРѕРїРєРѕР№ РЅР° РїСЂРѕРµРєС‚ -> Add -> Existing Item).
+Р”РѕР±Р°РІСЊ РїСѓС‚Рё Рє Р·Р°РіРѕР»РѕРІРѕС‡РЅС‹Рј С„Р°Р№Р»Р°Рј GLAD:
+Project -> Properties -> C/C++ -> General -> Additional Include Directories: РґРѕР±Р°РІСЊ РїСѓС‚СЊ Рє РїР°РїРєРµ include РёР· СЂР°СЃРїР°РєРѕРІР°РЅРЅРѕРіРѕ Р°СЂС…РёРІР° GLAD.
