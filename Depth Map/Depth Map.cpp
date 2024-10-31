@@ -117,6 +117,13 @@ GLuint createShaderProgram(const std::string& vertexSource, const std::string& f
     return shaderProgram;
 }
 
+glm::vec3* getPosition() {
+    return &position;
+}
+void setPosition(glm::vec3 var) {
+    position = var;
+}
+
 void visualizeDepthMap(const DepthMap& depthMap) {
     std::vector<float> vertices;
     std::vector<unsigned int> indices;
@@ -126,6 +133,7 @@ void visualizeDepthMap(const DepthMap& depthMap) {
         for (int x = 0; x < depthMap.width; ++x) {
             double z = depthMap.data[y * depthMap.width + x];
             if (z != 0) {
+                vertex_count++;
                 vertices.push_back(static_cast<float>(x));
                 vertices.push_back(static_cast<float>(y));
                 vertices.push_back(static_cast<float>(z));
@@ -193,6 +201,25 @@ void visualizeDepthMap(const DepthMap& depthMap) {
     std::string fragmentShaderSource = readShaderSource("fragment_shader.glsl");
     GLuint shaderProgram = createShaderProgram(vertexShaderSource, fragmentShaderSource);
 
+    glClearColor(0.3, 0.3, 0.3, 1.0); 
+    glEnable(GL_LIGHTING); 
+    glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE); 
+    glEnable(GL_NORMALIZE);
+
+    glViewport(0, 0, depthMap.width, depthMap.height);
+    glMatrixMode(GL_PROJECTION); 
+    glLoadIdentity(); 
+    glOrtho(-1.2, 1.2, -1.2, 1.2, -1, 1); 
+    glMatrixMode(GL_MODELVIEW); glLoadIdentity();
+
+    float light0_diffuse[] = { 0.4, 0.7, 0.2 }; 
+    float light0_direction[] = { 0.0, 0.0, 1.0, 0.0 }; 
+    glEnable(GL_LIGHT0); 
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, light0_diffuse); 
+    glLightfv(GL_LIGHT0, GL_POSITION, light0_direction);
+
+
+
     while (!glfwWindowShouldClose(glfwGetCurrentContext())) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -238,6 +265,9 @@ void exportToPly(const DepthMap& depthMap, const std::string& filename) {
     file << "property double x\n";
     file << "property double y\n";
     file << "property double z\n";
+
+    file << "element face " << 80488 << "\n";
+    file << "property list uchar int vertex_index\n";
     file << "end_header\n";
 
     for (double y = 0; y < depthMap.height; ++y) {
@@ -247,6 +277,10 @@ void exportToPly(const DepthMap& depthMap, const std::string& filename) {
                 file << x << " " << y << " " << z << "\n";
             }
         }
+    }
+    for (int i = 0; i < vertex_count - 4; ++i) {
+        file << 4 << " " << i << " " << i+1 << " " << i+2 << " " << i+3 <<"\n";
+        //std::cout << i << std::endl;
     }
 }
 
