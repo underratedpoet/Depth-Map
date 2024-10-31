@@ -8,7 +8,12 @@ Project -> Properties -> Linker -> General -> Additional Library Directories: д
 
 Project -> Properties -> Linker -> Input -> Additional Dependencies: добавь glfw3.lib.
 
+
+
 https://glad.dav1d.de/
+
 Добавь файлы glad.c в свой проект (правой кнопкой на проект -> Add -> Existing Item).
+
 Добавь пути к заголовочным файлам GLAD:
+
 Project -> Properties -> C/C++ -> General -> Additional Include Directories: добавь путь к папке include из распакованного архива GLAD.
