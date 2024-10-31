@@ -117,12 +117,7 @@ GLuint createShaderProgram(const std::string& vertexSource, const std::string& f
     return shaderProgram;
 }
 
-glm::vec3* getPosition() {
-    return &position;
-}
-void setPosition(glm::vec3 var) {
-    position = var;
-}
+
 
 void visualizeDepthMap(const DepthMap& depthMap) {
     std::vector<float> vertices;
