@@ -18,7 +18,7 @@
     <ClCompile Include="Depth Map.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\glad\src\glad.c">
+    <ClCompile Include="D:\Универ\7 сем 3D\gl libs\glad\src\glad.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

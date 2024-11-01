@@ -70,6 +70,14 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>D:\Универ\7 сем 3D\gl libs\glm-master\glm-master;D:\Универ\7 сем 3D\gl libs\glm-master\glm-master\glm;D:\Универ\7 сем 3D\gl libs\glew-2.1.0-win32\glew-2.1.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Универ\7 сем 3D\gl libs\glew-2.1.0-win32\glew-2.1.0\lib\Release\Win32;D:\Универ\7 сем 3D\gl libs\glew-2.1.0-win32\glew-2.1.0\lib\Release\x64;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>D:\Универ\7 сем 3D\gl libs\glm-master\glm-master;D:\Универ\7 сем 3D\gl libs\glm-master\glm-master\glm;D:\Универ\7 сем 3D\gl libs\glew-2.1.0-win32\glew-2.1.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Универ\7 сем 3D\gl libs\glew-2.1.0-win32\glew-2.1.0\lib\Release\Win32;D:\Универ\7 сем 3D\gl libs\glew-2.1.0-win32\glew-2.1.0\lib\Release\x64;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -104,13 +112,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\User\Desktop\Visual Studio Projects\glm-0.9.6.3\glm;C:\Users\User\Desktop\Visual Studio Projects\glfw-3.4.bin.WIN64\glfw-3.4.bin.WIN64\include;C:\Users\User\Desktop\Visual Studio Projects\glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Универ\7 сем 3D\gl libs\glew-2.1.0-win32\glew-2.1.0\include;D:\Универ\7 сем 3D\gl libs\glfw-3.4.bin.WIN64\glfw-3.4.bin.WIN64\include;D:\Универ\7 сем 3D\gl libs\glad\include;C:\Users\User\Desktop\Visual Studio Projects\glm-0.9.6.3\glm;C:\Users\User\Desktop\Visual Studio Projects\glfw-3.4.bin.WIN64\glfw-3.4.bin.WIN64\include;C:\Users\User\Desktop\Visual Studio Projects\glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\User\Desktop\Visual Studio Projects\glfw-3.4.bin.WIN64\glfw-3.4.bin.WIN64\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\Универ\7 сем 3D\gl libs\glfw-3.4.bin.WIN64\glfw-3.4.bin.WIN64\lib-vc2022;C:\Users\User\Desktop\Visual Studio Projects\glfw-3.4.bin.WIN64\glfw-3.4.bin.WIN64\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glew32s.lib;glfw3.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -121,16 +129,19 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>D:\Универ\7 сем 3D\gl libs\glew-2.1.0-win32\glew-2.1.0\include;D:\Универ\7 сем 3D\gl libs\glfw-3.4.bin.WIN64\glfw-3.4.bin.WIN64\include;D:\Универ\7 сем 3D\gl libs\glad\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>D:\Универ\7 сем 3D\gl libs\glfw-3.4.bin.WIN64\glfw-3.4.bin.WIN64\lib-vc2022;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glew32s.lib;glfw3.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\glad\src\glad.c" />
+    <ClCompile Include="D:\Универ\7 сем 3D\gl libs\glad\src\glad.c" />
     <ClCompile Include="Depth Map.cpp" />
   </ItemGroup>
   <ItemGroup>
