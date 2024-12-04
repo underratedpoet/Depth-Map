@@ -123,7 +123,9 @@ void initOpenGL(GLFWwindow*& window) {
 // Функция для загрузки данных карты глубины в буфер OpenGL
 GLuint loadDepthMap(const DepthMap& depthMap) {
     std::vector<float> vertices;
+    std::cout << vertex_count << std::endl;
     for (size_t i = 0; i < depthMap.data.size(); ++i) {
+
         float x = (i % static_cast<int>(depthMap.width)) / depthMap.width;
         float y = (i / static_cast<int>(depthMap.width)) / depthMap.height;
         float z = depthMap.data[i];
@@ -132,11 +134,14 @@ GLuint loadDepthMap(const DepthMap& depthMap) {
             vertices.push_back(x);
             vertices.push_back(y);
             vertices.push_back(z/1000);
+            vertex_count++;
+
             
          }
 
-    }
 
+    }
+    std::cout << vertex_count << std::endl;
     GLuint VBO, VAO;
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
@@ -162,24 +167,62 @@ void exportToPly(const DepthMap& depthMap, const std::string& filename) {
         throw std::runtime_error("Unable to open file");
     }
 
+    std::vector<std::vector<unsigned int>> vertexes;
+    unsigned int ply_count = 0;
+    for (double y = 0; y < depthMap.height; ++y) {
+        std::vector<unsigned int> vertex_line;
+        for (double x = 0; x < depthMap.width; ++x) {
+            double z = depthMap.data[y * depthMap.width + x];
+            //if (z != 0) {
+                vertex_line.push_back(ply_count);
+                ply_count++;
+            //}
+        }
+        if (!vertex_line.empty()) {
+            vertexes.push_back(vertex_line);
+        }
+    }
+
+    std::vector<std::vector<unsigned int>> faces;
+    for (int y = 0; y < vertexes.size() - 1; ++y) {
+        for (int x = 0; x < vertexes[y].size() - 1; ++x) {
+            unsigned int v1 = vertexes[y][x];
+            unsigned int v2 = (x < vertexes[y + 1].size()) ? vertexes[y + 1][x] : vertexes[y + 1].back();
+            unsigned int v3 = (x + 1 < vertexes[y + 1].size()) ? vertexes[y + 1][x + 1] : vertexes[y + 1].back();
+            unsigned int v4 = (x + 1 < vertexes[y].size()) ? vertexes[y][x + 1] : vertexes[y].back();
+
+            std::vector<unsigned int> face1 = { v1, v2, v3 };
+            std::vector<unsigned int> face2 = { v1, v4, v3 };
+
+            faces.push_back(face1);
+            faces.push_back(face2);
+        }
+    }
+
     file << "ply\n";
     file << "format ascii 1.0\n";
-    file << "element vertex " << vertex_count << "\n";
+    file << "element vertex " << ply_count << "\n";
     file << "property double x\n";
     file << "property double y\n";
     file << "property double z\n";
     file << "property uchar red\n";
     file << "property uchar green\n";
     file << "property uchar blue\n";
+    file << "element face " << faces.size() << "\n";
+    file << "property list uchar uint vertex_indices\n";
     file << "end_header\n";
 
     for (double y = 0; y < depthMap.height; ++y) {
         for (double x = 0; x < depthMap.width; ++x) {
             double z = depthMap.data[y * depthMap.width + x];
-            if (z != 0) {
+            //if (z != 0) {
                 file << x << " " << y << " " << z << " " << 255 << " " << 200 << " " << 100 << "\n";
-            }
+            //}
         }
+    }
+
+    for (const auto& face : faces) {
+        file << "3 " << face[0] << " " << face[1] << " " << face[2] << "\n";
     }
 }
 
@@ -194,8 +237,7 @@ int main() {
         std::cout << "READ SUCCESSFUL" << std::endl;
         std::cout << depthMap;
         std::cout << "VISUALIZE" << std::endl;
-        //exportToPly(depthMap, "output.ply");
-        std::cout << "EXPORT SUCCESSFUL" << std::endl;
+
 
         GLFWwindow* window;
         initOpenGL(window);
@@ -210,7 +252,7 @@ int main() {
 
             // Настройка матриц модели, вида и проекции
             glm::mat4 model = glm::mat4(1.0f);
-            view = glm::lookAt(glm::vec3((GLfloat)-sin(glfwGetTime()), (GLfloat)sin(glfwGetTime()), (GLfloat)cos(glfwGetTime())), glm::vec3(0.5f, 0.5f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+            view = glm::lookAt(glm::vec3(0.0f, 0.0f ,1.0f), glm::vec3(0.5f, 0.5f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
             //view = glm::lookAt(glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(0.5f, 0.5f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
             glm::mat4 projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
@@ -234,6 +276,8 @@ int main() {
         }
 
         glfwTerminate();
+        exportToPly(depthMap, "output.ply");
+        std::cout << "EXPORT SUCCESSFUL" << std::endl;
         return 0;
     }
     catch (const std::exception& e) {
