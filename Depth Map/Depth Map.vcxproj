@@ -143,11 +143,16 @@
   <ItemGroup>
     <ClCompile Include="D:\Универ\7 сем 3D\gl libs\glad\src\glad.c" />
     <ClCompile Include="Depth Map.cpp" />
+    <ClCompile Include="config.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="config.json" />
     <None Include="fragment_shader.glsl" />
     <None Include="Readme.md" />
     <None Include="vertex_shader.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="config.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

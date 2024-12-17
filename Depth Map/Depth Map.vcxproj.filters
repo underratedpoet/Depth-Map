@@ -21,10 +21,19 @@
     <ClCompile Include="D:\Универ\7 сем 3D\gl libs\glad\src\glad.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="config.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="vertex_shader.glsl" />
     <None Include="fragment_shader.glsl" />
     <None Include="Readme.md" />
+    <None Include="config.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="config.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

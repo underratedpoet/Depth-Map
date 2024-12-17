@@ -1,0 +1,12 @@
+{
+  "depthMapFile": "C:\\Users\\danie\\source\\repos\\Depth-Map\\Depth Map\\DepthMap_13.dat",
+  "lightPosition.x": 0.0,
+  "lightPosition.y": 2.0,
+  "lightPosition.z": 5.0,
+  "observerPosition.x": 1.0,
+  "observerPosition.y": 1.0,
+  "observerPosition.z": 1.0,
+  "reflectionModel": "Torrens",
+  "outputFile": "output",
+  "outputFormat": "vrml"
+}
